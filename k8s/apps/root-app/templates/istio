@@ -34,3 +34,31 @@ spec:
       enabled: true
     syncOptions:
       - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: {{ .Values.istio.spec.destination.namespace | default "istio-system" }}
+    server: {{ .Values.global.spec.destination.server | default "https://kubernetes.default.svc" }}
+  project: {{ .Values.istio.spec.destination.project | default "default" }}
+  source:
+    path: k8s/apps/istio
+    repoURL: https://github.com/RangersMS/homelab
+    targetRevision: {{ .Values.global.spec.source.targetRevision | default "main" }}
+    helm:
+      valueFiles:
+      - values.yaml
+      ignoreMissingValueFiles: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      enabled: true
+    syncOptions:
+      - CreateNamespace=true
