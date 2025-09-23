@@ -10,3 +10,9 @@ sealedSecrets:
     destination:
       namespace: sealed-secrets
     project: default
+
+istio:
+  spec:
+    destination:
+      namespace: istio-system
+    project: default

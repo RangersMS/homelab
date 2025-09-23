@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.istio.spec.destination.namespace | default "istio-system" }}
+  labels:
+    istio-injection: enabled
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-base
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: {{ .Values.istio.spec.destination.namespace | default "istio-system" }}
+    server: {{ .Values.global.spec.destination.server | default "https://kubernetes.default.svc" }}
+  project: {{ .Values.istio.spec.destination.project | default "default" }}
+  source:
+    path: k8s/apps/istio-base
+    repoURL: https://github.com/RangersMS/homelab
+    targetRevision: {{ .Values.global.spec.source.targetRevision | default "main" }}
+    helm:
+      valueFiles:
+      - values.yaml
+      ignoreMissingValueFiles: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      enabled: true
+    syncOptions:
+      - CreateNamespace=true
