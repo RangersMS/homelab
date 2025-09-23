@@ -1,0 +1,7 @@
+{
+    "yaml.schemas": {
+        "Kubernetes": "*.yaml",
+        "https://www.schemastore.org/helmfile.json": "file:///Users/marcel/git/homelab/k8s/apps/root-app/values.yaml",
+        "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.32.1-standalone-strict/all.json": "file:///Users/marcel/git/homelab/k8s/apps/sealed-secrets/Chart.yaml"
+    }
+}

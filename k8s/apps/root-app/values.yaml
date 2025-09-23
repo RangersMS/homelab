@@ -1,0 +1,12 @@
+global:
+  spec:
+    destination:
+      server: https://kubernetes.default.svc
+    source:
+      targetRevision: main
+
+sealedSecrets:
+  spec:
+    destination:
+      namespace: sealed-secrets
+    project: default

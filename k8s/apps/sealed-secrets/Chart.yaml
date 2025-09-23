@@ -1,0 +1,8 @@
+apiVersion: v2
+name: root-app
+version: 2.17.7
+appVersion: 0.32.2
+dependencies:
+  - name: sealed-secrets
+    repository: https://bitnami-labs.github.io/sealed-secrets
+    version: 2.17.7
