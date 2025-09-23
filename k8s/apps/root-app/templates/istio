@@ -62,3 +62,9 @@ spec:
       enabled: true
     syncOptions:
       - CreateNamespace=true
+  ignoreDifferences:
+  - group: admissionregistration.k8s.io
+    jqPathExpressions:
+    - .webhooks[].failurePolicy
+    kind: ValidatingWebhookConfiguration
+    name: istio-validator-istio-system 
