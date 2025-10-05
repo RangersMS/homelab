@@ -28,3 +28,9 @@ gatewayCRD:
     project: default
     source:
       targetRevision: v1.3.0
+
+metallb:
+  spec:
+    destination:
+      namespace: metallb-system
+    project: default

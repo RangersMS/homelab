@@ -1,0 +1,33 @@
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ .Values.metallb.spec.destination.namespace | default "sealed-secrets" }}
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metallb
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: {{ .Values.metallb.spec.destination.namespace | default "metallb-system" }}
+    server: {{ .Values.global.spec.destination.server | default "https://kubernetes.default.svc" }}
+  project: {{ .Values.metallb.spec.destination.project | default "default" }}
+  source:
+    path: k8s/apps/metallb
+    repoURL: https://github.com/RangersMS/homelab
+    targetRevision: {{ .Values.global.spec.source.targetRevision | default "main" }}
+    helm:
+      valueFiles:
+      - values.yaml
+      ignoreMissingValueFiles: true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      enabled: true
+    syncOptions:
+      - CreateNamespace=true
