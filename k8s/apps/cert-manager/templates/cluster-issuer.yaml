@@ -16,6 +16,3 @@ spec:
           apiKeySecretRef:
             name: cloudflare-api-key-secret
             key: api-key
-        selector:
-          dnsZones:
-          - 'rangers-labs.com'
