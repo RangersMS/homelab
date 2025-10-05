@@ -22,3 +22,9 @@ certManager:
     destination:
       namespace: cert-manager
     project: default
+
+gatewayCRD:
+  spec:
+    project: default
+    source:
+      targetRevision: v1.3.0
