@@ -16,3 +16,9 @@ istio:
     destination:
       namespace: istio-system
     project: default
+
+certManager:
+  spec:
+    destination:
+      namespace: cert-manager
+    project: default
