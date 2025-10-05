@@ -8,7 +8,7 @@ metadata:
 spec:
   destination:
     server: {{ .Values.global.spec.destination.server | default "https://kubernetes.default.svc" }}
-  project: {{ .Values.gatewayCRD.spec.destination.project | default "default" }}
+  project: {{ .Values.gatewayCRD.spec.project | default "default" }}
   source:
     path: config/crd/standard/
     repoURL: https://github.com/kubernetes-sigs/gateway-api/
